@@ -1,10 +1,4 @@
-.logo.vite:hover {
-  filter: drop-shadow(0 0 2em #747bff);
-}
 
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafb);
-}
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -12,13 +6,62 @@
   font-weight: 400;
 
   color: #0f0f0f;
-  background-color: #f6f6f6;
+  background-color: #3b3939;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+
+  /* Custom Vars */
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 2rem;
+  --fs-title: 40px;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-bold: 700;
+
+  /* ---------- Colours ---------- */
+  --bg-app: #1c1c1f;        /* window background */
+  --bg-surface: #26262a;    /* cards, panels */
+  --bg-elevated: #303036;   /* taskbar, raised elements */
+  --bg-hover: #3a3a41;
+
+  --border: #3f3f46;
+  --border-strong: #52525b;
+
+  --text-primary: #ececf1;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+
+  --accent: #67b99a;
+  --accent-hover: #78c6a3;
+  --accent-subtle: rgba(103, 185, 154, 0.15);
+  --on-accent: #1c1c1f;
+
+  --success: #88d4ab;
+  --warning: #facc15;
+  --danger: #f87171;
+
+  /* ---------- Spacing ---------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+
+  /* ---------- Shape & depth ---------- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.35);
+  
 }
 
 .container {
@@ -30,87 +73,73 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: 0.75s;
-}
 
-.logo.tauri:hover {
-  filter: drop-shadow(0 0 2em #24c8db);
-}
+/* ------------------------------------------------------------------------------------------------------------------- */
 
-.row {
+/*- - - - - - Taskbar - - - - - -*/
+#taskbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 125px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  padding: 0 var(--space5);
+  background-color: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  z-index: 10;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+#tbTitle {
+  margin: 0;
+  padding: 20px;
+  font-size: var(--fs-title);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.05em;
+  color: var(--accent);
 }
 
-a:hover {
-  color: #535bf2;
+#taskbarBtns {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  flex: 1;
+  min-height: 0;
+  overflow-y: none;
+  padding: 0.2em;
 }
 
-h1 {
-  text-align: center;
-}
-
-input,
-button {
-  border-radius: 8px;
+#taskbarBtns button {
+  width: 100%;
+  flex-shrink: 0;
+  text-align: left;
+  font: inherit;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-secondary);
+  background: transparent;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  color: #0f0f0f;
-  background-color: #ffffff;
-  transition: border-color 0.25s;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-}
-
-button {
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
   cursor: pointer;
+  transition: background-color var(--transition-fast),
+    color var(--transition-fast), border-color var(--transition-fast);
 }
 
-button:hover {
-  border-color: #396cd8;
-}
-button:active {
-  border-color: #396cd8;
-  background-color: #e8e8e8;
+#taskbarBtns button:hover {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
 }
 
-input,
-button {
-  outline: none;
+#taskbarBtns button.active {
+  background-color: var(--accent-subtle);
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
-#greet-input {
-  margin-right: 5px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color: #f6f6f6;
-    background-color: #2f2f2f;
-  }
-
-  a:hover {
-    color: #24c8db;
-  }
-
-  input,
-  button {
-    color: #ffffff;
-    background-color: #0f0f0f98;
-  }
-  button:active {
-    background-color: #0f0f0f69;
-  }
+#taskbarBtns button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
 }

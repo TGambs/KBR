@@ -1,0 +1,5 @@
+
+- - - To run dev build - - -
+"npm run tauri dev"
+- - - - - - - - - - - - - - -
+
