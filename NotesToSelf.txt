@@ -3,3 +3,18 @@
 "npm run tauri dev"
 - - - - - - - - - - - - - - -
 
+
+- - - For Storage and Hashing - - -
+npm run tauri add stronghold
+npm run tauri add store
+
+cd src-tauri
+cargo add argon2@0.5 rand@0.8 serde --features serde/derive
+cargo add serde_json
+
+< added this to src-tauri/Cargo.toml >
+[profile.dev.package."*"]
+opt-level = 3
+
+- - - - - - - - - - - - - - - - - -
+
