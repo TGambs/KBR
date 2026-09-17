@@ -25,6 +25,11 @@
   --fw-medium: 500;
   --fw-bold: 700;
 
+
+  --taskbar-width: 125px;
+  --taskbar-gap: 15px;
+  --taskbar-total: calc(var(--taskbar-width) + var(--taskbar-gap));
+
   /* ---------- Colours ---------- */
   --bg-app: #1c1c1f;        /* window background */
   --bg-surface: #26262a;    /* cards, panels */
@@ -65,8 +70,8 @@
 }
 
 .container {
-  margin: 0;
-  padding-top: 10vh;
+  margin: 0 var(--taskbar-gap) 0 var(--taskbar-total);
+  padding-top: 10vh var(--space-5) var(--space-6) var(--space-6);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -76,13 +81,25 @@
 
 /* ------------------------------------------------------------------------------------------------------------------- */
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+notice {
+  background-color: rgb(192, 39, 39);
+}
+
 /*- - - - - - Taskbar - - - - - -*/
 #taskbar {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
-  width: 125px;
+  width: var(--taskbar-width);
   display: flex;
   flex-direction: column;
   padding: 0 var(--space5);
@@ -142,4 +159,23 @@
 #taskbarBtns button:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: -2px;
+}
+
+
+/* - - - - - - Register & Login Page - - - - - - - */
+#pg1Main {
+  width: 100%;
+}
+
+#registerFormCont {
+  background-color: var(--bg-elevated);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+#loginUserN, #loginPwrd1st, #loginPwrd2nd {
+  margin-bottom: 20px;
 }

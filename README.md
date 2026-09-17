@@ -1,7 +1,14 @@
-# Tauri + React + Typescript
+# KBR
+### by TGambs
 
-This template should help get you started developing with Tauri, React and Typescript in Vite.
+-------------------------------------
 
-## Recommended IDE Setup
+All-in-one post quantum hub for ML-KEM 
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+
+### Stack:
+React & Css for front end/UI
+Rust for backend logic
+Powershell for testing
+Rust ML-KEM Crate - https://crates.io/crates/ml-kem
+Stronghold for secure storage

@@ -67,11 +67,10 @@ function LoginPage({ onLogin }: Props) {
     <div id="pg1Main">
         <h1>{isRegister ? "Create your account" : "Log in"}</h1> {/* heading changes with mode */}
 
-        <form className="authForm" onSubmit={handleSubmit}>
+        <form className="authForm" id="registerFormCont" onSubmit={handleSubmit}>
             <div id="loginUserN">
                 <label>
-                    Username
-                    <input
+                    Username  <input
                     value={username} // shows the username - if there is one already
                     onChange={(e) => setUsername(e.target.value)} // updates state as the user types
                     autoComplete="username" // hint for password manager
@@ -82,8 +81,7 @@ function LoginPage({ onLogin }: Props) {
 
             <div id="loginPwrd1st">
                 <label>
-                    Password
-                    <input
+                    Password  <input
                     type="password" // hides the typed characters
                     value={password} // shows the current state value
                     onChange={(e) => setPassword(e.target.value)} // updates state as the user types
@@ -97,8 +95,7 @@ function LoginPage({ onLogin }: Props) {
             {isRegister && ( // only show the confirm field when registering
                 <div id="loginPwrd2nd">
                     <label>
-                        Confirm password
-                        <input
+                        Confirm password  <input
                         type="password" // hides the typed characters
                         value={confirm} // shows the current state value
                         onChange={(e) => setConfirm(e.target.value)} // updates state as the user types

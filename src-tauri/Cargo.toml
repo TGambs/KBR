@@ -26,6 +26,8 @@ tauri-plugin-stronghold = "2"
 tauri-plugin-store = "2"
 argon2 = "0.5"
 rand = "0.8"
+ml-kem = "0.2"
+base64 = "0.23.1"
 
 [profile.dev.package."*"]
 opt-level = 3

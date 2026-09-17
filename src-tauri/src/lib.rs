@@ -1,6 +1,9 @@
 use tauri::Manager;
 
+// - - - - Modules being used - - - -
 mod auth;
+mod crypto;
+// - - - - - - - - - - - - - - - - - -
 
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -24,7 +27,8 @@ pub fn run() {
             auth::account_status, // account exists?
             auth::register, // create account
             auth::login, // checks pword and starts session
-            auth::logout // ends session
+            auth::logout, // ends session
+            crypto::generate_mlkem_keypair // generates encap/decap key pair
         ])
 
         .run(tauri::generate_context!())

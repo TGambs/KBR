@@ -1,9 +1,10 @@
 
 import { useEffect, useState } from "react";
 import { invoke } from "@tauri-apps/api/core";
+import { closeVault, type Vault } from "./vault";
 import "./App.css";
 import LoginPage from "./LoginPage";
-import { closeVault, type Vault } from "./vault";
+import KeysPage from "./KeysPage";
 
 
 function App() {
@@ -39,8 +40,8 @@ function App() {
   
 
   return (
-    <main className="container">
 
+    <>
       <div id="taskbar">
         <p id="tbTitle">KBR</p>
         <div id="taskbarBtns">
@@ -50,39 +51,48 @@ function App() {
         </div>
       </div>
 
-      {/* popup only rendered when there is a message*/}
-      {notice && <div id="notice">{notice}</div>}
+      <main className="container">
 
-      
-      {activePage === "pg1" && (
-        <div id="pg1Main">
-          <h1>Page 1</h1>
-          {user ? (
-            <>
-              <h1>Logged in as {user}</h1>
-              <button onClick={logout}>Log Out</button>
-            </>
-          ) : (
-            <LoginPage onLogin={handleLogin} />
-          )}
-        </div>
-      )}{/* end of page 1 */}
+        {/* popup only rendered when there is a message*/}
+        {notice && <div id="notice">{notice}</div>}
+
+        
+        {activePage === "pg1" && (
+          <div id="pg1Main">
+
+            {/* - - - This only shows if there is a user logged in - - - */}
+
+            {user ? (
+              <>
+                <h1>Logged in as {user}</h1>
+                <button onClick={logout}>Log Out</button>
+              </>
+            ) : (
+              <LoginPage onLogin={handleLogin} />
+            )}
+
+            {/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */}
+
+          </div>
+        )}{/* end of page 1 */}
 
 
-      {activePage === "pg2" && (
-        <div id="pg2Main">
-          <h1>Page 2</h1>
-        </div>
-      )}{/* end of page 2 */}
+        {user && vault && activePage === "pg2" && (
+          <div id="pg2Main">
+            <KeysPage vault={vault}/>
+          </div>
+        )}{/* end of page 2 */}
 
 
-      {activePage === "pg3" && (
-        <div id="pg3Main">
-          <h1>Page 3</h1>
-        </div>
-      )}{/* end of page 3 */}
+        {user && activePage === "pg3" && (
+          <div id="pg3Main">
+            <h1>Page 3</h1>
+          </div>
+        )}{/* end of page 3 */}
 
-    </main>
+      </main>
+
+    </>
   );
 }
 

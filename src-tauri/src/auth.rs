@@ -112,3 +112,16 @@ pub fn logout(session: State<Session>) -> Result<(), String>{
     *session.0.lock().map_err(|_| "Session error")? = None; //clears logged in user
     Ok(())
 }
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// logged in checker
+pub fn require_login(session: &Session) -> Result<String, String> {
+    session
+        .0 //define thread inside session
+        .lock() // locks thread
+        .map_err(|_| "Session error".to_string())? //turns error to text
+        .clone() // copies the Option<String> output
+        .ok_or_else(|| "Not logged in.".to_string())
+}
