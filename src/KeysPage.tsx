@@ -16,10 +16,17 @@ function KeysPage({ vault }: Props){
     const [editName, setEditName] = useState("");
     const [confirmDeletedId, setConfirmDeletedId] = useState<string | null>(null);
     const [copiedId, setCopiedId] = useState<string | null>(null);
+    const [notice, setNotice] = useState("");
 
     useEffect(() => {
         listKeys(vault).then(setKeys).catch((e) => setError(String(e)));
     }, [vault]);
+
+    useEffect(() => {
+    if (!notice) return;
+    const t = setTimeout(() => setNotice(""), 3000);
+    return () => clearTimeout(t);
+  }, [notice]);
 
 
     async function run(action: () => Promise<void>){
@@ -40,8 +47,37 @@ function KeysPage({ vault }: Props){
     // for key generation
     function handleGenerate() {
         run(async () => {
-            await generateKey(vault, newName.trim() || `Key ${keys.length + 1}`); //calls key gen function
-            setNewName(""); //clears text field
+            
+            const current = await listKeys(vault);
+            const typed = newName.trim();
+
+            const taken = (n: string) =>
+                current.some((k) => k.name.trim().toLowerCase() === n.trim().toLowerCase());
+
+            let name: string;
+
+            if (typed && !taken(typed)) {
+                name = typed;
+            }else{
+                let highest = 0;
+                for (const k of current){
+                    const match = /^Key (\d+)$/.exec(k.name.trim());
+                    if (match){
+                        const n = Number(match[1]);
+                        if(n>highest) highest = n;
+                    }
+                }
+
+                name = `Key ${highest + 1}`;
+
+                if(typed){
+                    setNotice(`"${typed}" is already in use - named it "${name}" instead.`);
+                }
+            }
+
+            await generateKey(vault, name);
+            setNewName("");
+
         })
     }
 
@@ -94,13 +130,19 @@ function KeysPage({ vault }: Props){
 
             </form>
 
-            {error && <p className="forError">{error}</p>}
+            <div className="errorDiv">
+                {error && <p className="formError">{error}</p>}
+                {notice && <p className="formError">{notice}</p>}
+            </div>
+            
 
             {keys.length === 0 ? (
                 <p className="emptyState">No keys yet - Generate one to get started</p>
             ) : (
                 <ul className="keyList">
                     {keys.map((k) => (
+
+                        // Each key gets its own "card" - split into Header(key meta)-KeyValue-KeyActions(copy,rename,delete)
                         <li key={k.id} className="keyCard">
                             <div className="keyHeader">
                                 {editingId === k.id ? (
@@ -111,28 +153,39 @@ function KeysPage({ vault }: Props){
                                         autoFocus
                                     />
                                 ) : (
-                                    <strong>{k.name}</strong>
+                                    <strong>{k.name}  -  </strong>
                                 )}
 
                                 <span className="keyMeta">
-                                    {k.algorithm} · {new Date(k.createdAt).toLocaleString()}
+                                    <i>{k.algorithm} · {new Date(k.createdAt).toLocaleString()}</i>
                                 </span>
                             </div>
 
-                            <code className="keyValue" title={k.publicKey}>{k.publicKey}</code>
+                            {/* Only show the first 30 characters of the public key */}
+                            <code className="keyValue" title={k.publicKey}>{k.publicKey.slice(0, 30)}...</code> 
 
                             <div className="keyActions">
-                                <button className="btn" onClick={() => handleCopy(k)}>
+                                <button className="btnPrimary-info" onClick={() => handleCopy(k)}>
                                     {copiedId === k.id ? "Copied!" : "Copy public key"}
                                 </button>
 
                                 {editingId === k.id ? (
                                     <>
-                                        <button className="btn btnPrimary" disabled={busy} onClick={() => handleRename(k.id)}>Save</button>
-                                        <button className="btn" onClick={() => setEditingId(null)}>Cancel</button>
+                                        <button className="btnPrimary" disabled={busy} onClick={() => handleRename(k.id)}>Save</button>
+                                        <button className="btnPrimary-cancel" onClick={() => setEditingId(null)}>Cancel</button>
                                     </>
                                 ) : (
-                                    <button className="btn" onClick={() => handleDelete(k.id)}>Delete</button>
+                                    <button className="btnPrimary" onClick={() => {setEditingId(k.id); setEditName(k.name);}}>Rename</button>
+                                )}
+
+
+                                {confirmDeletedId === k.id ? (
+                                    <>
+                                        <button className="btnPrimary-delete" disabled={busy} onClick={() => handleDelete(k.id)}>Confirm Delete</button>
+                                        <button className="btnPrimary-cancel" onClick={() => setConfirmDeletedId(null)}>Cancel</button>
+                                    </>
+                                ) : (
+                                    <button className="btnPrimary-delete" onClick={() => setConfirmDeletedId(k.id)}>Delete</button>
                                 )}
 
                             </div>

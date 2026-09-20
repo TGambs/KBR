@@ -35,6 +35,7 @@
   --bg-surface: #26262a;    /* cards, panels */
   --bg-elevated: #303036;   /* taskbar, raised elements */
   --bg-hover: #3a3a41;
+  --bg-card: #395e4f;
 
   --border: #3f3f46;
   --border-strong: #52525b;
@@ -49,7 +50,8 @@
   --on-accent: #1c1c1f;
 
   --success: #88d4ab;
-  --warning: #facc15;
+  --info: #294b79;
+  --warning: #e0bc29;
   --danger: #f87171;
 
   /* ---------- Spacing ---------- */
@@ -92,6 +94,52 @@ body {
 notice {
   background-color: rgb(192, 39, 39);
 }
+
+input {
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 5px;
+  margin: var(--space-1)
+
+}
+
+
+/* - - - - Global Buttons - - - - */
+.btnPrimary, .btnPrimary-cancel, .btnPrimary-delete, .btnPrimary-info {
+  font: inherit;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-primary);
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  margin-left: var(--space-2);
+  margin-right: var(--space-2);
+  cursor: pointer;
+  transition: background-color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.btnPrimary:hover:not(:disabled) {
+  background-color: var(--bg-hover);
+  border-color: var(--border-strong);
+}
+
+.btnPrimary:active:not(:disabled) {
+  transform: translateY(1px);   /* small press effect */
+}
+
+.btnPrimary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.btnPrimary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 
 /*- - - - - - Taskbar - - - - - -*/
 #taskbar {
@@ -162,7 +210,7 @@ notice {
 }
 
 
-/* - - - - - - Register & Login Page - - - - - - - */
+/* - - - - - - PAGE 1  |  Register & Login Page - - - - - - - */
 #pg1Main {
   width: 100%;
 }
@@ -178,4 +226,64 @@ notice {
 
 #loginUserN, #loginPwrd1st, #loginPwrd2nd {
   margin-bottom: 20px;
+}
+
+
+
+/* - - - - - - PAGE 2  |  Key Generation Page - - - - - - - */
+
+/* form is for generating new keypair*/
+.keyform{
+  /*background-color: red;*/
+}
+
+.errorDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formError{
+  background-color: var(--danger);
+  width: fit-content;
+  padding: var(--space-1) var(--space-3);
+  margin: var(--space-4) 0 0 0;
+  border-radius: var(--radius-sm);
+}
+
+.keyList{
+  align-items: center;
+  background-color: var(--bg-elevated);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-4) 0 0 0;
+  margin-left: var(--space-6);
+  margin-right: var(--space-6);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.keyCard {
+  background-color: var(--bg-card);
+  padding: var(--space-4);
+  margin: var(--space-4);
+  width: fit-content;
+  list-style:none;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.btnPrimary-delete{
+  background-color: var(--danger);
+  box-shadow: var(--shadow-sm);
+}
+
+.btnPrimary-cancel{
+  background-color: var(--warning);
+  box-shadow: var(--shadow-sm);
+}
+
+.btnPrimary-info{
+  background-color: var(--info);
+  box-shadow: var(--shadow-sm);
 }
