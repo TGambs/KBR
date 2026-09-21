@@ -5,6 +5,7 @@ import { closeVault, type Vault } from "./vault";
 import "./App.css";
 import LoginPage from "./LoginPage";
 import KeysPage from "./KeysPage";
+import EncryptPage from "./EncryptPage";
 
 
 function App() {
@@ -46,8 +47,9 @@ function App() {
         <p id="tbTitle">KBR</p>
         <div id="taskbarBtns">
           <button id="tbBt1" className={activePage === "pg1" ? "active" : ""} onClick={() => setActivePage("pg1")}>Login</button>
-          <button id="tbBt2" className={`${activePage === "pg2" ? "active" : ""} ${!user ? "locked" : ""}`} onClick={() => user ? setActivePage("pg2") : setNotice("Please log in to access Key Pair Gen.")}>Key Pair Gen</button>
-          <button id="tbBt3" className={`${activePage === "pg3" ? "active" : ""} ${!user ? "locked" : ""}`} onClick={() => user ? setActivePage("pg3") : setNotice("Please log in to access Page 3.")}>Page3</button>
+          <button id="tbBt2" className={`${activePage === "pg2" ? "active" : ""} ${!user ? "locked" : ""}`} onClick={() => user ? setActivePage("pg2") : setNotice("Please log in to access Key Pair Gen.")}>Key Pairs</button>
+          <button id="tbBt3" className={`${activePage === "pg3" ? "active" : ""} ${!user ? "locked" : ""}`} onClick={() => user ? setActivePage("pg3") : setNotice("Please log in to access Encryption.")}>Encryption</button>
+          <button id="tbBt4" className={`${activePage === "pg4" ? "active" : ""} ${!user ? "locked" : ""}`} onClick={() => user ? setActivePage("pg4") : setNotice("Please log in to access Decryption.")}>Decryption</button>
         </div>
       </div>
 
@@ -86,9 +88,16 @@ function App() {
 
         {user && activePage === "pg3" && (
           <div id="pg3Main">
-            <h1>Page 3</h1>
+            <EncryptPage />
           </div>
         )}{/* end of page 3 */}
+
+
+        {user && activePage === "pg4" && (
+          <div id="pg4Main">
+            <h1>Page 4</h1>
+          </div>
+        )}{/* end of page 4 */}
 
       </main>
 

@@ -91,3 +91,18 @@ export async function deleteKey(vault: Vault, id: string){
     await writeIndex(vault ,keys.filter((k) => k.id !== id));
     await vault.stronghold.save();
 }
+
+
+// - - - - for en/decryption - - - -
+export async function getSecretKey(vault: Vault, id: string): Promise<number[]>{
+
+    const keys = await listKeys(vault);
+    if(!keys.some((k) => k.id === id)){
+        throw new Error("Key not found.");
+    }
+
+    const sk = await vault.client.getStore().get(skRecord(id));
+    if (!sk) throw new Error("Secret key is missing from the vault.");
+
+    return Array.from(sk);
+}

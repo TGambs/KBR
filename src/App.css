@@ -85,10 +85,16 @@
 
 * {
   box-sizing: border-box;
+  scrollbar-width: none;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
+}
+
+h1{
+  padding-bottom: var(--space-2);
 }
 
 notice {
