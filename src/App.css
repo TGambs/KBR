@@ -293,3 +293,52 @@ input {
   background-color: var(--info);
   box-shadow: var(--shadow-sm);
 }
+
+
+
+/* - - - - - - - - - - Encrypt Page - - - - - - - -- - */
+
+#encMainPanel{
+  background-color: var(--bg-elevated);
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--space-4);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.cryptoField textarea {
+  align-self: center;
+  width: 480px;
+}
+
+#encKeyIn, #encMsgIn, #encMsgOut{
+  background-color: var(--bg-card);
+  margin: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-2);
+
+}
+
+#encButton {
+  background-color: var(--info);
+}
+
+#encKeyIn{
+
+}
+
+#encMsgIn {
+
+}
+
+#encMsgOut, #encMsgOut label{
+
+}
+
+#encMsgOut label {
+
+}

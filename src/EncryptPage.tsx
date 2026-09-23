@@ -45,48 +45,60 @@ function EncryptPage() {
         <>
 
             <h1>Encrypt</h1>
+            <div id="encMainPanel">
 
-            <label className="cryptoField">
-                Recipient's Public Key
-                <textarea
-                    value={publicKey}
-                    onChange={(e) => setPublicKey(e.target.value)}
-                    rows={3}
-                    placeholder="Paste the recipient's ML-KEM-768 public key here"
-                />
-            </label>
+                <div id="encKeyIn">
+                    <p>Recipient's Public Key</p>
+                    <label className="cryptoField">
+                        <textarea
+                            value={publicKey}
+                            onChange={(e) => setPublicKey(e.target.value)}
+                            rows={5}
+                            placeholder="Paste the recipient's ML-KEM-768 public key here"
+                        />
+                    </label>
+                </div>
 
-            <label className="cryptoField">
-                Message
-                <textarea
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    rows= {6}
-                    placeholder="Message to be encrypted here"
-                />
-            </label>
+                <div id="encMsgIn">
+                    <p>Message</p>
+                    <label className="cryptoField">
+                        <textarea
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            rows= {6}
+                            placeholder="Message to be encrypted here"
+                        />
+                    </label>
+                </div>
 
-            <button
-                className="btnPrimary"
-                disabled = {busy || !publicKey.trim() || !message}
-                onClick={handleEncrypt}
-            >
-                {busy ? "Encrypting..." : "Encrypt"}
-            </button>
+                <button
+                    className="btnPrimary" id="encButton"
+                    disabled = {busy || !publicKey.trim() || !message}
+                    onClick={handleEncrypt}
+                >
+                    {busy ? "Encrypting..." : "Encrypt"}
+                </button>
 
 
-            {error && <p className="formError">{error}</p>}
+                {error && <p className="formError">{error}</p>}
 
 
-            {result && (
-                <label className="cryptoField">
-                    Encrypted Message
-                    <textarea value={result} readOnly rows={6}/>
-                    <button className="btnPrimary-info" onClick={handleCopy}>
-                        {copied ? "Copied" : "Copy encrypted message"}
-                    </button>
-                </label>
-            )}
+                {result && (
+                    <div id="encMsgOut">
+                        <p>Encrypted Message</p>
+                        <label className="cryptoField">
+                            <textarea value={result} readOnly rows={6}/>
+                            <br/>
+                            <button className="btnPrimary-info" onClick={handleCopy}>
+                                {copied ? "Copied" : "Copy encrypted message"}
+                            </button>
+                        </label>
+                    </div>
+                )}
+
+            </div>
+
+        
         </>
     );
 }
