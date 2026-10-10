@@ -347,3 +347,16 @@ input {
 #encMsgIn {
 
 }
+
+
+/* ------------------- Decryption Page ----------------- */
+#decMainPanel {
+  display: flex;
+  flex-direction: column;
+}
+
+.decPanelPart {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}

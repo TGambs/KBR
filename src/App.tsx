@@ -6,6 +6,7 @@ import "./App.css";
 import LoginPage from "./LoginPage";
 import KeysPage from "./KeysPage";
 import EncryptPage from "./EncryptPage";
+import DecryptPage from "./DecryptPage";
 
 
 function App() {
@@ -95,7 +96,7 @@ function App() {
 
         {user && activePage === "pg4" && (
           <div id="pg4Main">
-            <DecryptPage vault={vault}>
+            <DecryptPage vault={vault}/>
           </div>
         )}{/* end of page 4 */}
 
