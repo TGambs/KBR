@@ -36,6 +36,7 @@
   --bg-elevated: #303036;   /* taskbar, raised elements */
   --bg-hover: #3a3a41;
   --bg-card: #395e4f;
+  --bg-trans: rgba(158, 158, 158, 0.505);
 
   --border: #3f3f46;
   --border-strong: #52525b;
@@ -311,7 +312,13 @@ input {
 .cryptoField textarea {
   align-self: center;
   width: 480px;
+  background-color: var(--bg-trans);
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  resize: vertical;
 }
+
 
 #encKeyIn, #encMsgIn, #encMsgOut{
   background-color: var(--bg-card);
@@ -324,7 +331,13 @@ input {
 }
 
 #encButton {
+  margin-top: var(--space-2);
   background-color: var(--info);
+}
+
+#encMsgIn p,
+#encKeyIn p {
+  margin: var(--space-2);
 }
 
 #encKeyIn{
@@ -332,13 +345,5 @@ input {
 }
 
 #encMsgIn {
-
-}
-
-#encMsgOut, #encMsgOut label{
-
-}
-
-#encMsgOut label {
 
 }

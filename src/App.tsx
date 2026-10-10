@@ -95,7 +95,7 @@ function App() {
 
         {user && activePage === "pg4" && (
           <div id="pg4Main">
-            <h1>Page 4</h1>
+            <DecryptPage vault={vault}>
           </div>
         )}{/* end of page 4 */}
 

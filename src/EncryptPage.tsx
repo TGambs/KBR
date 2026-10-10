@@ -87,7 +87,7 @@ function EncryptPage() {
                     <div id="encMsgOut">
                         <p>Encrypted Message</p>
                         <label className="cryptoField">
-                            <textarea value={result} readOnly rows={6}/>
+                            <textarea value={result} readOnly rows={30}/>
                             <br/>
                             <button className="btnPrimary-info" onClick={handleCopy}>
                                 {copied ? "Copied" : "Copy encrypted message"}

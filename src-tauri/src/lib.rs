@@ -30,7 +30,7 @@ pub fn run() {
             auth::logout, // ends session
             crypto::generate_mlkem_keypair, // generates encap/decap key pair
             crypto::encrypt_message, // encrypts to a recipient's public key
-            //crypto::decrypt_message // decrypts with a stored secret key
+            crypto::decrypt_message // decrypts with a stored secret key
         ])
 
         .run(tauri::generate_context!())

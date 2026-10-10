@@ -64,6 +64,7 @@ fn derive_aes_key(shared_secret: &[u8]) -> Result<[u8; 32], String> {
 }
 
 
+// - - - - - - Message encryption - - - - - - - - -
 #[tauri::command]
 pub fn encrypt_message(
     session: State<Session>,
@@ -113,4 +114,64 @@ pub fn encrypt_message(
 
 
     Ok(STANDARD.encode(&blob))
+}
+
+
+
+
+// - - - - - - - - - - - - Message Decryption - - - - - - - - - - - - - -
+#[tauri::command]
+pub fn decrypt_message(
+    session: State<Session>,
+    secret_key: Vec<u8>,
+    blob: String,
+) -> Result<String, String>{
+
+    require_login(&session)?;
+
+    let data = STANDARD
+        .decode(blob.trim())
+        .map_err(|_| "Message is not valid base64.".to_string())?;
+
+    if data.len() < 1 + KEM_CT_LEN + NONCE_LEN + 16 {
+        return Err("Message is too short or corrupted.".into());
+    }
+
+    if data[0] != VERSION {
+        return Err(format!("Unsupported message format (version {}).", data[0]));
+    }
+
+    // Split blob into parts
+    let kem_ct = &data[1..1 + KEM_CT_LEN];
+    let nonce_bytes = &data[1 + KEM_CT_LEN..1 + KEM_CT_LEN + NONCE_LEN];
+    let ct = &data[1 + KEM_CT_LEN + NONCE_LEN..];
+
+
+    // parse the secret key
+    let dk_array = Array::try_from(&secret_key[..])
+        .map_err(|_| "Stored key is wrong length for ML-KEM768".to_string())?;
+    let dk = <MlKem768 as KemCore>::DecapsulationKey::from_bytes(&dk_array);
+
+    
+    // Decapsulate - if done incorrectly this returns random value (implicit rejection)
+    let kem_ct_array = Array::try_from(kem_ct)
+        .map_err(|_| "Message in ciphertext is malformed".to_string())?;
+
+    let shared_secret = dk
+        .decapsulate(&kem_ct_array)
+        .map_err(|_| "Decapsulation Failed".to_string())?;
+
+    let aes_key = derive_aes_key(&shared_secret)?;
+
+    let cipher = Aes256Gcm::new(Key::<Aes256Gcm>::from_slice(&aes_key));
+
+    let plaintext = cipher
+        .decrypt(Nonce::from_slice(nonce_bytes), ct)
+        .map_err(|_| "Decryption Failed - Either wrong key was used or message was altered".to_string())?;
+
+    String::from_utf8(plaintext).map_err(|_| "Decrypted data is not valid text".to_string())
+
+    
+
+
 }
