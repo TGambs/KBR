@@ -48,7 +48,7 @@ function EncryptPage() {
             <div id="encMainPanel">
 
                 <div id="encKeyIn">
-                    <p>Recipient's Public Key</p>
+                    <p className="p1"><b>Recipient's Public Key</b></p>
                     <label className="cryptoField">
                         <textarea
                             value={publicKey}
@@ -60,7 +60,7 @@ function EncryptPage() {
                 </div>
 
                 <div id="encMsgIn">
-                    <p>Message</p>
+                    <p className="p1"><b>Message</b></p>
                     <label className="cryptoField">
                         <textarea
                             value={message}
@@ -71,13 +71,15 @@ function EncryptPage() {
                     </label>
                 </div>
 
-                <button
-                    className="btnPrimary" id="encButton"
-                    disabled = {busy || !publicKey.trim() || !message}
-                    onClick={handleEncrypt}
-                >
-                    {busy ? "Encrypting..." : "Encrypt"}
-                </button>
+                <div className="decPanelPart">
+                    <button
+                        className="btnPrimary" id="encButton"
+                        disabled = {busy || !publicKey.trim() || !message}
+                        onClick={handleEncrypt}
+                    >
+                        {busy ? "Encrypting..." : "Encrypt"}
+                    </button>
+                </div>
 
 
                 {error && <p className="formError">{error}</p>}
@@ -85,7 +87,7 @@ function EncryptPage() {
 
                 {result && (
                     <div id="encMsgOut">
-                        <p>Encrypted Message</p>
+                        <p className="p1"><b>Encrypted Message</b></p>
                         <label className="cryptoField">
                             <textarea value={result} readOnly rows={30}/>
                             <br/>

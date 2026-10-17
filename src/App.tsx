@@ -68,7 +68,7 @@ function App() {
             {user ? (
               <>
                 <h1>Logged in as {user}</h1>
-                <button onClick={logout}>Log Out</button>
+                <button id="logOutBtn" onClick={logout}>Log Out</button>
               </>
             ) : (
               <LoginPage onLogin={handleLogin} />

@@ -63,9 +63,9 @@ function DecryptPage({vault}: Props){
                     <div id="decMainPanel">
 
                         <div className="decPanelPart">
-                            <p>Decrypt Key</p>
+                            <p className="p1"><b>Decrypt Key</b></p>
                             <label className="cryptoField">
-                                <select value={keyId} onChange={(e) => setKeyId(e.target.value)}>
+                                <select className="cryptoSelect" value={keyId} onChange={(e) => setKeyId(e.target.value)}>
                                     {keys.map((k) => (
                                         <option key={k.id} value={k.id}>{k.name}</option>
                                     ))}
@@ -75,7 +75,7 @@ function DecryptPage({vault}: Props){
 
 
                         <div className="decPanelPart">
-                            <p>Encrypted Message</p>
+                            <p className="p1"><b>Encrypted Message</b></p>
                             <label className="cryptoField">
                                 <textarea
                                     value={blob}
@@ -89,7 +89,7 @@ function DecryptPage({vault}: Props){
 
                         <div className="decPanelPart">
                             <button
-                                className="btnPrimary"
+                                className="btnPrimary" id="encButton"
                                 disabled={busy || !keyId || !blob.trim()}
                                 onClick={handleDecrypt}
                             >
@@ -98,18 +98,21 @@ function DecryptPage({vault}: Props){
                         </div>
 
 
-                        <div className="decPanelPart">
-                            {error && <p className="formError">{error}</p>}
-                        </div>
+                        {error && (
+                            <div id="decErrorPart">
+                                {error && <p className="formError">{error}</p>}
+                            </div>
+                        )}
 
-                            {result && (
-                                <div className="decPanelPart">
-                                    <p>Decrypted Message</p>
-                                    <label className="cryptoField">
-                                        <textarea value={result} readOnly rows={6}/>
-                                    </label>
-                                </div>
-                            )}
+
+                        {result && (
+                            <div className="decPanelPart">
+                                <p className="p1">Decrypted Message</p>
+                                <label className="cryptoField">
+                                    <textarea value={result} readOnly rows={6}/>
+                                </label>
+                            </div>
+                        )}
                         
 
                     </div>
