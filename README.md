@@ -27,4 +27,4 @@ All-in-one post-quantum hub for ML-KEM cryptography. It is a password protected 
 - Rust for backend logic
 - Powershell for testing
 - Rust ML-KEM Crate - https://crates.io/crates/ml-kem
-- Stronghold for secure storage
+- Stronghold for secure storage - https://v2.tauri.app/plugin/stronghold/
