@@ -15,6 +15,7 @@ All-in-one post-quantum hub for ML-KEM cryptography. It is a password protected 
 - Secure Login
 
 #### Future Functionality:
+- Account Deletion
 - Importing Key Pairs
 - Exporting Key Pairs As Files
 - Logo
@@ -22,8 +23,8 @@ All-in-one post-quantum hub for ML-KEM cryptography. It is a password protected 
 -------------------------------------
 
 ### Stack:
-React & Css for front end/UI
-Rust for backend logic
-Powershell for testing
-Rust ML-KEM Crate - https://crates.io/crates/ml-kem
-Stronghold for secure storage
+- React & Css for front end/UI
+- Rust for backend logic
+- Powershell for testing
+- Rust ML-KEM Crate - https://crates.io/crates/ml-kem
+- Stronghold for secure storage
