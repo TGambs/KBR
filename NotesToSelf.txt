@@ -4,6 +4,11 @@
 - - - - - - - - - - - - - - -
 
 
+- - - - - - - - - - - - - - -
+npm run reset
+- - - - - - - - - - - - - - -
+
+
 - - - For Storage and Hashing - - -
 npm run tauri add stronghold
 npm run tauri add store
@@ -18,3 +23,8 @@ opt-level = 3
 
 - - - - - - - - - - - - - - - - - -
 
+
+Version update in:
+tauri.conf.json
+package.json
+cargo.toml

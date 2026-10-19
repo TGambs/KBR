@@ -115,20 +115,23 @@ function KeysPage({ vault }: Props){
         <>
             <h1>My Keys</h1>
 
-            <form className="keyform" onSubmit={(e) => { e.preventDefault(); handleGenerate(); }}>
+            <div id="keyFormCont">
+                <form className="keyform" onSubmit={(e) => { e.preventDefault(); handleGenerate(); }}>
 
-                <input
-                    value={newName}
-                    onChange={(e) => setNewName(e.target.value)}
-                    placeholder="Key name (optional)"
-                    maxLength={50} // MUST MATCH KEYSTORE LIMIT
-                />
+                    <input
+                        value={newName}
+                        onChange={(e) => setNewName(e.target.value)}
+                        placeholder="Key name (optional)"
+                        maxLength={50} // MUST MATCH KEYSTORE LIMIT
+                    />
 
-                <button type="submit" className="btn btnPrimary" disabled={busy}>
-                    {busy ? "Working..." : "Generate ML-KEM key pair"}
-                </button>
+                    <button type="submit" className="btn btnPrimary" disabled={busy}>
+                        {busy ? "Working..." : "Generate ML-KEM key pair"}
+                    </button>
 
-            </form>
+                </form>
+            </div>
+
 
             <div className="errorDiv">
                 {error && <p className="formError">{error}</p>}

@@ -141,6 +141,10 @@ input {
 #logOutBtn {
   background-color: rgb(188, 5, 5);
 }
+#loginErr {
+  align-self: center;
+  margin-bottom: var(--space-2);
+}
 /*--------------- Log Page ------------------*/
 
 .btnPrimary:hover:not(:disabled) {
@@ -257,6 +261,9 @@ input {
 /* form is for generating new keypair*/
 .keyform{
   /*background-color: red;*/
+}
+#keyFormCont{
+  background-color: red;
 }
 
 .errorDiv{

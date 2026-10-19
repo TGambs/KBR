@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Vault } from "./vault";
-import { generateKey, deleteKey, listKeys, renameKey, type KeyMeta, getSecretKey } from "./keystore";
+import {listKeys, type KeyMeta, getSecretKey } from "./keystore";
 import { invoke } from "@tauri-apps/api/core";
 
 

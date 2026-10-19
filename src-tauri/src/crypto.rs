@@ -1,7 +1,7 @@
 
 //for key pair gen
 use base64::{engine::general_purpose::STANDARD, Engine}; //base64 encoder
-use ml_kem::{EncodedSizeUser, KemCore, MlKem768, SharedKey}; // for ML KEM 768 usage
+use ml_kem::{EncodedSizeUser, KemCore, MlKem768}; // for ML KEM 768 usage
 use serde::Serialize;
 use tauri::State;
 

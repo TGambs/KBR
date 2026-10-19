@@ -106,7 +106,7 @@ function LoginPage({ onLogin }: Props) {
                 </div>
             )}
 
-            {error && <p className="formError">{error}</p>} {/* shows error if there is one */}
+            {error && <p id="loginErr" className="formError">{error}</p>} {/* shows error if there is one */}
 
             <button type="submit" disabled={busy}>{/* submits the form - disabled while busy */}
             {busy ? "Please wait…" : isRegister ? "Create account" : "Log in"}{/* label depends on state and mode */}
